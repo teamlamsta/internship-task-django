@@ -48,11 +48,12 @@ class SignUpSerializer(serializers.Serializer):
     mobile_number = serializers.CharField()
 
     def save(self, **kwargs):
-        user = User.objects.create_user(email=self.validated_data['email'],
-                                        password=self.validated_data['password'],
-                                        full_name=self.validated_data['full_name'],
-                                        mobile_number=self.validated_data['mobile_number'],
-                                        )
+        user = User.objects.create_user(
+            email=self.validated_data['email'],
+            password=self.validated_data['password'],
+            full_name=self.validated_data['full_name'],
+            mobile_number=self.validated_data['mobile_number'],
+        )
         user.set_password(self.validated_data['password'])
         user.save()
         return user
