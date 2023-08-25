@@ -89,8 +89,10 @@ class Profile(viewsets.ViewSet):
         serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            logger.info(f"Profile data for user {request.user.id} has been updated.", extra={
-                        'data': serializer.data})
+            logger.info(
+                f"Profile data for user {request.user.id} has been updated.",
+                extra={
+                    'data': serializer.data})
             user.save()
             return Response(serializer.data)
 
@@ -154,7 +156,8 @@ class LoginView(generics.GenericAPIView):
         logger.info(f"User is logging in.")
         google_key = request.data.get('google_key')
 
-        # If a Google OAuth2 token was provided, attempt to authenticate the user
+        # If a Google OAuth2 token was provided, attempt to authenticate the
+        # user
         if google_key:
             try:
                 # Verify the Google OAuth2 token and extract user information
@@ -162,13 +165,17 @@ class LoginView(generics.GenericAPIView):
                     google_key, requests.Request(),
                     GOOGLE_CLIENT_ID
                 )
-                logger.info(f"User {user_info['email']} is trying to logging in.", extra={
-                            'data': user_info})
+                logger.info(
+                    f"User {user_info['email']} is trying to logging in.",
+                    extra={
+                        'data': user_info})
 
-                # Attempt to retrieve an existing user with the authenticated email address
+                # Attempt to retrieve an existing user with the authenticated
+                # email address
                 user = User.objects.filter(email=user_info['email']).first()
 
-                # If a user with the authenticated email exists, generate access and refresh tokens and return them
+                # If a user with the authenticated email exists, generate
+                # access and refresh tokens and return them
                 if user:
                     logger.info(f"User {user.get_full_name()} is logging in.")
                     token = RefreshToken.for_user(user)
@@ -193,7 +200,8 @@ class LoginView(generics.GenericAPIView):
                         'access_token': str(token.access_token),
                     })
 
-            # If an exception is raised during authentication, return a bad request response
+            # If an exception is raised during authentication, return a bad
+            # request response
             except (ValueError,) as e:
                 print(e)
                 logger.warning(f"User  is logging in failed.",
@@ -223,12 +231,14 @@ class PassLogin(generics.GenericAPIView):
                         })
                     else:
                         # Invalid password
-                        return Response(status=status.HTTP_401_UNAUTHORIZED,
-                                        data={"message": "Invalid email or password"})
+                        return Response(
+                            status=status.HTTP_401_UNAUTHORIZED, data={
+                                "message": "Invalid email or password"})
                 else:
                     # User not found with the given email
-                    return Response(status=status.HTTP_401_UNAUTHORIZED,
-                                    data={"message": "Invalid email or password"})
+                    return Response(
+                        status=status.HTTP_401_UNAUTHORIZED, data={
+                            "message": "Invalid email or password"})
             except Exception as e:
                 print(e)
                 logger.warning(f"User  is logging in failed.",

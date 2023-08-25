@@ -8,10 +8,13 @@ class AccountTests(APITestCase):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.user_without_verification = User.objects.create_user(email="test@gmail.com", password="test1234",
-                                                                  full_name="test")
-        self.user_with_verification = User.objects.create_user(email="test1@gmail.com", password="test1234",
-                                                               full_name="test1", is_verified=True)
+        self.user_without_verification = User.objects.create_user(
+            email="test@gmail.com", password="test1234", full_name="test")
+        self.user_with_verification = User.objects.create_user(
+            email="test1@gmail.com",
+            password="test1234",
+            full_name="test1",
+            is_verified=True)
         self.profile_url = reverse('profile')
 
     def test_profile_without_verification(self):
