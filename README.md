@@ -4,14 +4,6 @@
 
 Welcome to the project README! This document provides an overview of the various modules and components present in your Django project.
 
-## Table of Contents
-
-1. [auth_login](#auth_login)
-2. [base](#base)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Running with Docker](#running-with-docker)
-
 ## auth_login
 
 The `auth_login` app handles user authentication, registration, and user profile management.
@@ -65,8 +57,8 @@ You can also run the project using Docker for easy setup and management. Follow 
 1. Make sure you have Docker installed on your system.
 2. Clone the repository to your local machine.
 3. Open a terminal and navigate to the project directory.
-4. Build the Docker image: `docker build -t project-name .`
-5. Run the Docker container: `docker run -p 8000:8000 -d project-name`
+4. Build the Docker image: `docker compose build .`
+5. Run the Docker container: `docker compose up `
 6. Access the project at `http://localhost:8000/`.
 
 Remember to replace `project-name` with your actual project's name.
