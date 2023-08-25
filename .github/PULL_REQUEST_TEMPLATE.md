@@ -1,5 +1,3 @@
-# <!-- Title -->
-
 ## Description
 
 <!-- A brief description of what this pull request aims to achieve. -->
