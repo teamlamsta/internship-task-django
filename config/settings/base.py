@@ -76,7 +76,7 @@ INSTALLED_APPS += CUSTOM_APPS + THIRD_PARTY_APPS
 APPLICATION_NAME = 'internship task'
 
 # Login URL
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = "/auth/login/pass/"
 
 # Middleware
 MIDDLEWARE = [
