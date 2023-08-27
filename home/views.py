@@ -18,7 +18,8 @@ class URLViewSet(viewsets.ModelViewSet):
     serializer_class = URLSerializer
    
     #permission_classes = [IsAuthenticated, ]
-
+    
+    #Shortens the url
     @action(detail=False, methods=['post'])
     @swagger_auto_schema(responses={201: "Successfully added!"})
     def shorten(self, request):
@@ -29,6 +30,7 @@ class URLViewSet(viewsets.ModelViewSet):
         # created_user= request.user
 
         try:
+            #checks if custom url is provided.If not generates a new short_url
             if short_url:
                 instance = URL.objects.filter(short_url=short_url).first()
                 try:
@@ -62,10 +64,11 @@ class URLViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response("error occured while adding", status=status.HTTP_400_BAD_REQUEST)
 
-
+    #Redirects to the original url
     @action(detail=True, methods=['get'])
     @swagger_auto_schema(responses={201: "Successfully added!"})
     def redirect(self, request, short_url=None):
+        #checks if the given short_url is found
         if not short_url:
             return Response({"error": "Parameter 'short_url' is required."}, status=status.HTTP_400_BAD_REQUEST)
         try:
@@ -89,7 +92,8 @@ class URLViewSet(viewsets.ModelViewSet):
             return redirect(instance.original_url)
         except Exception as e:
             raise APIException({" Error:", "e", e})
-
+            
+    #analytics(provide the click count lacation and referral sources)
     @action(detail=True, methods=['get'])
     @swagger_auto_schema(responses={201: "Successfully added!"})
     def stats(self, request, short_url=None):
