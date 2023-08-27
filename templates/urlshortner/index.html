@@ -21,7 +21,7 @@
     />
   </head>
   <body>
-    <main>
+    <div class="container">
       <h1>URL Shortener</h1>
       <form id="post-form">
         {% csrf_token %}
@@ -33,12 +33,14 @@
           placeholder="Enter shortened URL here"
         />
         <div class="buttons">
-          <button type="button" id="random">Generate random short url</button>
-          <button type="submit" id="shorten">Create a url</button>
+          <button type="button" id="random">Generate random short URL</button>
+          <button type="submit" id="shorten">Create a URL</button>
         </div>
       </form>
 
-      <section id="section"><h2></h2></section>
-    </main>
+      <section id="section">
+        <h2></h2>
+      </section>
+    </div>
   </body>
 </html>
