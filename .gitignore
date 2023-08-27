@@ -1,6 +1,7 @@
 venv
 **/migrations/0*
 **/pychache__*
+**/__pycache__/*
 
 # Environments
 .env
