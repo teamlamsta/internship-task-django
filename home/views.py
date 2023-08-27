@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from home.serializers import UrlSerializer
+from home.serializers import UrlSerializer, UrlAnalyticsSerializer
 from home.models import UrlShortner
 
 class ShortnerCreateView(CreateAPIView):
@@ -55,7 +55,7 @@ shortner_redirect_view = ShortnerRedirectView.as_view()
 
 class ShortnerAnalyticsView(RetrieveAPIView):
     queryset = UrlShortner.objects.filter(is_active=True)
-    serializer_class = UrlSerializer
+    serializer_class = UrlAnalyticsSerializer
     lookup_field = "slug"
     permission_classes =[AllowAny]
 
