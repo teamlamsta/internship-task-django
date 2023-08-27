@@ -24,8 +24,12 @@ class ShortnerCreateView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         data = request.data
 
-        url_short = UrlShortner.objects.create(incoming_url= data.get('incoming_url'), outgoing_url = data.get('outgoing_url'))
-        url_short.save()
+        try:
+            url_short = UrlShortner.objects.create(incoming_url= data.get('incoming_url'), outgoing_url = data.get('outgoing_url'))
+            url_short.save()
+            return Response({"message": "Successfully Created Short URL"},201)
+        except Exception as e:
+            return Response({"detail":"Error Occured"},400)
 
 shortner_create_view = ShortnerCreateView.as_view()
 
