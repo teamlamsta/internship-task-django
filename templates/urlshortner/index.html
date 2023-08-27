@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'js/urlshortener.js' %}"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/urlshortener.css' %}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form id="post-form">
+        {% csrf_token %}
+        <input type="text" name="link" id="link" placeholder="Enter URL here" />
+        <input
+          type="text"
+          name="short_link"
+          id="short_link"
+          placeholder="Enter shortened URL here"
+        />
+        <div class="buttons">
+          <button type="button" id="random">Generate random short URL</button>
+          <button type="submit" id="shorten">Create a URL</button>
+        </div>
+      </form>
+
+      <section id="section">
+        <h2></h2>
+      </section>
+    </div>
+  </body>
+</html>
